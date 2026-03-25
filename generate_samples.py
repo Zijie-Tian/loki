@@ -1,5 +1,5 @@
 from methods import init_tensor_saver
-from methods.common.configure_model import get_h2o_args, get_topk_args, get_spar_args, get_pca_args, get_save_tensor_args
+from methods.common.configure_model import get_h2o_args, get_topk_args, get_pca_args, get_save_tensor_args
 from methods.common.configure_model import get_modifier
 import numpy as np
 import torch
@@ -54,18 +54,18 @@ if __name__ == "__main__":
 
     cache = None
     if args.use_topk:
-        modifier_method(args.top_k)
+        modifier_method(args)
     elif args.use_h2o:
-        modifier_method(args.heavy_ratio)
-    elif args.use_sparq or args.use_spark:
-        modifier_method(args.top_r, args.top_k)
-    elif args.use_spar_hat:
-        cache = modifier_method(args.top_r)
+        modifier_method(args)
+    elif getattr(args, "use_sparq", False) or getattr(args, "use_spark", False):
+        modifier_method(args)
+    elif getattr(args, "use_spar_hat", False):
+        cache = modifier_method(args)
     elif args.use_pca:
-        modifier_method(args.top_r)
+        modifier_method(args)
         args.use_axonn = False
     elif args.use_pca_topk:
-        modifier_method(args.top_r, args.top_k)
+        modifier_method(args)
         args.use_axonn = False
 
     

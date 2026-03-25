@@ -25,8 +25,9 @@ class TensorSaver:
 
     def save(self, category, tensor, extra_idx = None, extra_dir = ""):
         # Only save the tensor if the rank is 0
-        if torch.distributed.get_rank() != 0:
-            return
+        if torch.distributed.is_available() and torch.distributed.is_initialized():
+            if torch.distributed.get_rank() != 0:
+                return
         
         if not SAVE_TENSORS[category]:
             return
@@ -47,7 +48,7 @@ class TensorSaver:
             filename = f"{basefile}{extra_idx}_{index}.pt"
         else:
             filename = f"{basefile}{index}.pt"
-        torch.save(tensor, os.path.join(output_dir, filename))
+        torch.save(tensor.clone().detach().cpu(), os.path.join(output_dir, filename))
 
     def get_layer_idx(self):
         self.last_idx += 1
