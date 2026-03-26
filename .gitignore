@@ -9,3 +9,4 @@ examples/**/perlmutter/**
 tensors_out/
 pca_analysis/pca_output/
 pca_analysis/pca_output_pre/
+pca_analysis/*-PCA/
