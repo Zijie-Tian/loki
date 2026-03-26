@@ -14,9 +14,14 @@ The environment has been adapted to run on a newer `compass` conda environment.
   - `datasets==4.4.2`
   - `wandb==0.23.1`
 
-**Installation Command**:
+**Environment Configuration**:
+To set up and configure the `compass` environment with all necessary dependencies, use the provided setup script:
 ```bash
-# Assuming the use of the `compass` conda environment.
+bash setup_env.sh
+```
+
+To activate the environment after initial setup:
+```bash
 conda activate compass
 ```
 

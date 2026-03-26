@@ -61,7 +61,7 @@ if __name__ == "__main__":
         modifier_method(args)
     elif getattr(args, "use_spar_hat", False):
         cache = modifier_method(args)
-    elif args.use_pca:
+    elif getattr(args, "use_pca", False):
         modifier_method(args)
         args.use_axonn = False
     elif args.use_pca_topk:
